@@ -1,44 +1,46 @@
 import pygame
+from pygame.sprite import Sprite
 
-class Ship():
+
+class Ship(Sprite):
 
     def __init__(self, ai_settings, screen):
+        """Initialize the ship, and set its starting position."""
+        super(Ship, self).__init__()
         self.screen = screen
         self.ai_settings = ai_settings
 
-        # load ship image and get rect
-        self.image = pygame.image.load('images/ship.bmp')
+        # Load the ship image, and get its rect.
+        self.image = pygame.image.load('images/ship.png')
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
 
-        # start each new ship at bottom center scrn
+        # Start each new ship at the bottom center of the screen.
         self.rect.centerx = self.screen_rect.centerx
         self.rect.bottom = self.screen_rect.bottom
 
-        # store decimal value for ship's center
+        # Store a decimal value for the ship's center.
         self.center = float(self.rect.centerx)
 
-
-        # movement flags
+        # Movement flags.
         self.moving_right = False
         self.moving_left = False
 
+    def center_ship(self):
+        # Start the ship at the center
+        self.center = self.screen_rect.centerx
 
-
-    # update the ships' position based on movement flags
     def update(self):
-        # if statements limit the ships range
+        # Update the ship's position based on movement factors
+        # Update the ship's center value, not the rect.
         if self.moving_right and self.rect.right < self.screen_rect.right:
             self.center += self.ai_settings.ship_speed_factor
         if self.moving_left and self.rect.left > 0:
             self.center -= self.ai_settings.ship_speed_factor
 
-        # update rect obj
+        # Update rect object from self.center.
         self.rect.centerx = self.center
 
     def blitme(self):
+        # Draw the ship and the current position
         self.screen.blit(self.image, self.rect)
-
-        # i figured out what was wrong and why it wasn't displaying the ship. it was probably because of python3
-        # when i was testing to see why the ship wasn't coming in the screen i noticed that i could no longer change bg
-        # it indeed was because it wasn't actually running the code
