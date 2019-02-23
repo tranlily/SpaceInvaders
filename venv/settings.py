@@ -1,3 +1,6 @@
+import random
+
+
 class Settings():
     # Main class for game settings
 
@@ -14,16 +17,19 @@ class Settings():
         # Bullet settings.
         self.bullet_width = 3
         self.bullet_height = 10
-        self.bullet_color = 252,255,229
+        self.bullet_color = 253,231,236
         self.bullets_allowed = 10
 
         # Alien settings.
         self.fleet_drop_speed = 10
-
         # How quickly the game speeds up.
         self.speedup_scale = 1.1
         # How quickly the alien point values increase.
         self.score_scale = 1.5
+
+
+        self.last_ufo = None
+        self.ufo_min_interval = 10000
 
         self.initialize_dynamic_settings()
 
@@ -32,12 +38,15 @@ class Settings():
         self.ship_speed_factor = 20
         self.bullet_speed_factor = 20
         self.alien_speed_factor = 2
+        self.ufo_speed_factor = 5
 
         # Scoring.
-        self.alien_points = 1750
+        self.alien_points = 100
+        self.ufo_points = random.randint(1,101)
 
         # fleet_direction of 1 represents right, -1 represents left.
         self.fleet_direction = 1
+        self.ufo_direction = 1
 
     def increase_speed(self):
         """Increase speed settings and alien point values."""

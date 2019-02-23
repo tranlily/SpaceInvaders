@@ -15,6 +15,9 @@ class Ship(Sprite):
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
 
+        # SOUND FX
+        self.ship_shoot = pygame.mixer.Sound('shoot.wav')
+
         # Start each new ship at the bottom center of the screen.
         self.rect.centerx = self.screen_rect.centerx
         self.rect.bottom = self.screen_rect.bottom
@@ -30,6 +33,7 @@ class Ship(Sprite):
         # Start the ship at the center
         self.center = self.screen_rect.centerx
 
+
     def update(self):
         # Update the ship's position based on movement factors
         # Update the ship's center value, not the rect.
@@ -44,3 +48,5 @@ class Ship(Sprite):
     def blitme(self):
         # Draw the ship and the current position
         self.screen.blit(self.image, self.rect)
+
+

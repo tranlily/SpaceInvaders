@@ -5,7 +5,10 @@ from settings import Settings
 from game_stats import GameStats
 from scoreboard import Scoreboard
 from button import Button
+from score import Score
 from ship import Ship
+from ufo import Ufo
+
 import game_functions as gf
 
 
@@ -13,6 +16,7 @@ def run_game():
     # Initialize pygame, settings, and screen object.
     pygame.init()
 
+    # Music FX.
     pygame.mixer.music.load('darkness.wav')
     pygame.mixer.music.play(-1)
 
@@ -20,9 +24,9 @@ def run_game():
     screen = pygame.display.set_mode((ai_settings.screen_width, ai_settings.screen_height))
     pygame.display.set_caption("Alien Invasion")
 
-
     # Make the Play button.
-    play_button = Button(ai_settings, screen, "Play")
+    play_button = Button(ai_settings, screen, "PLAY GAME")
+    score_button = Score(ai_settings, screen, "HIGH SCORES", 0.80)
 
     # Create an instance to store game statistics, and a scoreboard.
     stats = GameStats(ai_settings)
@@ -33,19 +37,22 @@ def run_game():
     bullets = Group()
     aliens = Group()
 
+    ufos = Group()
+
+
     # Create the fleet of aliens.
     gf.create_fleet(ai_settings, screen, ship, aliens)
 
 
     # Start the main loop for the game.
     while True:
-        gf.check_events(ai_settings, screen, stats, sb, play_button, ship, aliens, bullets)
+        gf.check_events(ai_settings, screen, stats, sb, play_button, ship, aliens, ufos, bullets)
 
         if stats.game_active:
             ship.update()
-            gf.update_bullets(ai_settings, screen, stats, sb, ship, aliens, bullets)
-            gf.update_aliens(ai_settings, screen, stats, sb, ship, aliens, bullets)
+            gf.update_bullets(ai_settings, screen, stats, sb, ship, aliens, ufos, bullets)
+            gf.update_aliens(ai_settings, screen, stats, sb, ship, aliens, ufos, bullets)
 
-        gf.update_screen(ai_settings, screen, stats, sb, ship, aliens, bullets, play_button)
+        gf.update_screen(ai_settings, screen, stats, sb, ship, aliens, bullets, ufos, play_button, score_button)
 
 run_game()
