@@ -13,7 +13,7 @@ pygame
 ```
 
 ## Preview
-![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
+![Image of Game](https://github.com/tranlily/SpaceInvaders/blob/master/invaders_preview.png)
 
 ## Built With
 
