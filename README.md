@@ -13,7 +13,7 @@ pygame
 ```
 
 ## Preview
-![](preview.gif)
+![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
 
 ## Built With
 
